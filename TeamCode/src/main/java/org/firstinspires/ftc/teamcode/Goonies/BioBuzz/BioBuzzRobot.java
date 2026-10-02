@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IndicatorManager;
+import org.firstinspires.ftc.teamcode.Goonies.Common.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.RobotState;
 
 public class BioBuzzRobot implements IRobot {
@@ -30,6 +31,7 @@ public class BioBuzzRobot implements IRobot {
     public void Initialize(boolean forAutonomous, Pose startingPose) {
         _state = RobotState.Driving;
 
+        _mecanumDriveTrain = new MecanumDriveTrain(_hardwareMap);
         //Create the LED Indicator Array for displaying the driver state.
         _indicatorManager = new IndicatorManager();
 

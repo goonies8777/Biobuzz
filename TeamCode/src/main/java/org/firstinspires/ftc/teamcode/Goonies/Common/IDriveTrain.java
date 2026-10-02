@@ -10,4 +10,6 @@ public interface IDriveTrain {
     Pose getPose();
     void setStartingPose(Pose startingPose);
     void setPose(Pose pose);
+    void setPower(double lf, double lb,double rf, double rb);
+    void setPower(double power);
 }
