@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
+import org.firstinspires.ftc.teamcode.Goonies.Common.RobotState;
 import org.firstinspires.ftc.teamcode.Goonies.TeleOp.DriverController;
 import org.firstinspires.ftc.teamcode.Goonies.TeleOp.IController;
 import org.firstinspires.ftc.teamcode.Goonies.TeleOp.OperatorController;
@@ -40,6 +41,7 @@ public class BioBuzzTeleOpMode extends LinearOpMode {
         }
 
         if (_robot != null) {
+            _robot.setState(RobotState.Driving);
             _robot.updateIndicators();
         }
 

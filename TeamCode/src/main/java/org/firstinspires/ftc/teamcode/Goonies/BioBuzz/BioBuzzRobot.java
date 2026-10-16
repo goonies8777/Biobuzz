@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Goonies.BioBuzz;
 
 import com.pedropathing.math.Pose;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Goonies.Common.IDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IndicatorManager;
+import org.firstinspires.ftc.teamcode.Goonies.Common.LEDIndicator;
 import org.firstinspires.ftc.teamcode.Goonies.Common.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.RobotState;
 
@@ -33,7 +35,21 @@ public class BioBuzzRobot implements IRobot {
 
         _mecanumDriveTrain = new MecanumDriveTrain(_hardwareMap);
         //Create the LED Indicator Array for displaying the driver state.
+        _indicatorManager = new IndicatorManager();//Create the LED Indicator Array for displaying the driver state.
         _indicatorManager = new IndicatorManager();
+        _indicatorManager.addIndicator(
+                new LEDIndicator(
+                        _hardwareMap.get(DigitalChannel.class, "red1"),
+                        _hardwareMap.get(DigitalChannel.class, "green1")
+                )
+        );
+
+        _indicatorManager.addIndicator(
+                new LEDIndicator(
+                        _hardwareMap.get(DigitalChannel.class, "red2"),
+                        _hardwareMap.get(DigitalChannel.class, "green2")
+                )
+        );
 
         if (!forAutonomous) {
             _automated = false;
