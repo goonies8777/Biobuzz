@@ -5,6 +5,11 @@ import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
+import com.seattlesolvers.solverslib.drivebase.RobotDrive;
+import com.seattlesolvers.solverslib.util.Timing;
+
+import java.util.concurrent.TimeUnit;
 
 public class MecanumDriveTrain implements IDriveTrain{
     DcMotor _leftFront;
@@ -12,11 +17,20 @@ public class MecanumDriveTrain implements IDriveTrain{
     DcMotor _rightFront;
     DcMotor _rightBack;
 
+    DriveMode _driveMode;
+
+    MecanumDrive _robotDrive;
+
     public MecanumDriveTrain(HardwareMap hardwareMap){
         _leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         _leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         _rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         _rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
+        _leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        _leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        _rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        _rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         _leftFront.setPower(0);
         _leftBack.setPower(0);
@@ -28,20 +42,17 @@ public class MecanumDriveTrain implements IDriveTrain{
         _rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         _rightBack.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        _leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        _leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        _rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        _rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        _driveMode = DriveMode.ROBOT_CENTRIC;
     }
 
     @Override
     public void setDriveMode(DriveMode driveMode) {
-
+        _driveMode = driveMode;
     }
 
     @Override
     public DriveMode getDriveMode() {
-        return null;
+        return _driveMode;
     }
 
     @Override
@@ -75,5 +86,95 @@ public class MecanumDriveTrain implements IDriveTrain{
     @Override
     public void setPower(double power){
         setPower(power, power, power, power);
+    }
+
+    @Override
+    public RobotDrive getRobotDrive(){
+        return _robotDrive;
+    }
+
+    public void driveForwardForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(RobotConstants.DRIVE_SPEED);
+        }
+
+        setPower(0);
+    }
+
+    public void driveBackwardForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(-RobotConstants.DRIVE_SPEED);
+        }
+
+        setPower(0);
+    }
+
+    public void driveLeftForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(
+                    -RobotConstants.TURN_SPEED,
+                    -RobotConstants.TURN_SPEED,
+                    RobotConstants.TURN_SPEED,
+                    RobotConstants.TURN_SPEED);
+        }
+
+        setPower(0);
+    }
+
+    public void driveRightForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(
+                    RobotConstants.TURN_SPEED,
+                    RobotConstants.TURN_SPEED,
+                    -RobotConstants.TURN_SPEED,
+                    -RobotConstants.TURN_SPEED);
+        }
+        setPower(0);
+    }
+
+    public void strafeRightForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(
+                    RobotConstants.DRIVE_SPEED,
+                    -RobotConstants.DRIVE_SPEED,
+                    -RobotConstants.DRIVE_SPEED,
+                    RobotConstants.DRIVE_SPEED);
+        }
+        setPower(0);
+    }
+
+    public void strafeLeftForMilliseconds(int milliseconds){
+        Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
+
+        timer.start();
+
+        while(!timer.done()) {
+            setPower(
+                    -RobotConstants.DRIVE_SPEED,
+                    RobotConstants.DRIVE_SPEED,
+                    RobotConstants.DRIVE_SPEED,
+                    -RobotConstants.DRIVE_SPEED);
+        }
+        setPower(0);
     }
 }

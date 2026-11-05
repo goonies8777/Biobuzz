@@ -25,12 +25,28 @@ public class Shooter_kSTuner extends OpMode {
             incrementIndex--;
         }
 
+        if (gamepad1.aWasPressed()){
+            _shooter.setHood(.25);
+        }
+
+        if (gamepad1.bWasPressed()){
+            _shooter.setHood(.35);
+        }
+
+        if (gamepad1.yWasPressed()){
+            _shooter.setHood(.4);
+        }
+
+        if (gamepad1.xWasPressed()){
+            _shooter.setHood(.45);
+        }
+
         double currentStep = increments[incrementIndex];
 
         if (gamepad1.dpadUpWasPressed()) {kS += currentStep;}
         if (gamepad1.dpadDownWasPressed()) {kS -= currentStep;}
 
-        _shooter.setMotorPower(kS);
+        _shooter.setPower(kS);
 
         telemetry.addData("kS", "%.6f", kS);
         telemetry.addData("RPM", _shooter.getRPM());

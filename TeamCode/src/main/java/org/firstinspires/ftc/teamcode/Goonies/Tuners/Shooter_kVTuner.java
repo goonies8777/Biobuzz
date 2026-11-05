@@ -8,13 +8,13 @@ import org.firstinspires.ftc.teamcode.Goonies.Common.Shooter;
 @TeleOp(group = "Goonies", name = "Shooter kV Tuner")
 public class Shooter_kVTuner extends OpMode {
     Shooter _shooter;
-    public static double kV = 0.00;
-    public static double kS = 0.00;
-    public static double goalRPM = 3000;
+    public static double kV = 0.000171;
+    public static double kS = 0.09;
+    public static double goalRPM = 3600;
 
     double[] increments = {0.000001, 0.00001, 0.0001, 0.001, 0.01};
-    int incrementIndex = 4;
-    //Start at 0.01
+    int incrementIndex = 1;
+    //Start at 0.00001
     @Override
     public void init(){
         _shooter = new Shooter(hardwareMap);
@@ -29,7 +29,7 @@ public class Shooter_kVTuner extends OpMode {
         }
 
         if (gamepad1.a){
-            goalRPM = 3000;
+            goalRPM = 3600;
         }
         else if (gamepad1.b){
             goalRPM = 1500;
@@ -41,7 +41,7 @@ public class Shooter_kVTuner extends OpMode {
         if (gamepad1.dpadDownWasPressed()) {kV -= currentStep;}
 
         double power = (kV * goalRPM) + kS;
-        _shooter.setMotorPower(power);
+        _shooter.setPower(power);
 
         telemetry.addData("Step", "%.6f", currentStep);
         telemetry.addData("kV", "%.6f", kV);

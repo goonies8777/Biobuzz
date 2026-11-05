@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Goonies.TeleOp.DriverController;
 import org.firstinspires.ftc.teamcode.Goonies.TeleOp.IController;
 import org.firstinspires.ftc.teamcode.Goonies.TeleOp.OperatorController;
 
-@TeleOp(group = "Goonies", name = "BioBuzz")
+@TeleOp(group = "Goonies", name = "Pollenator300")
 public class BioBuzzTeleOpMode extends LinearOpMode {
     IRobot _robot;
     IController _driverController;
@@ -62,6 +62,7 @@ public class BioBuzzTeleOpMode extends LinearOpMode {
                 }
 
                 _robot.updateIndicators();
+                telemetry.addData("RPM", _robot.getShooter().getRPM());
             }
         } else {
             telemetry.addLine("No GamePads Instantiated");

@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.Goonies.TeleOp;
 
-import com.pedropathing.follower.Follower;
-import com.pedropathing.math.Pose;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
+import com.seattlesolvers.solverslib.drivebase.RobotDrive;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Goonies.Common.DriveMode;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
 

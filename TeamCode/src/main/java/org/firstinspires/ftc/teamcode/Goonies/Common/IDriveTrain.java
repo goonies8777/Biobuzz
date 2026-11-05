@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Goonies.Common;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
+import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
+import com.seattlesolvers.solverslib.drivebase.RobotDrive;
 
 public interface IDriveTrain {
     void setDriveMode(DriveMode driveMode);
@@ -12,4 +14,6 @@ public interface IDriveTrain {
     void setPose(Pose pose);
     void setPower(double lf, double lb,double rf, double rb);
     void setPower(double power);
+
+    RobotDrive getRobotDrive();
 }
