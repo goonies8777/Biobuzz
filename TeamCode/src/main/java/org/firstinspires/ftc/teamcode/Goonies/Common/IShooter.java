@@ -7,4 +7,5 @@ public interface IShooter {
     void setRPM(double targetRPM);
     double getTicksPerSec();
     double getRPM();
+    double getHood();
 }

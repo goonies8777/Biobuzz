@@ -62,7 +62,10 @@ public class BioBuzzTeleOpMode extends LinearOpMode {
                 }
 
                 _robot.updateIndicators();
-                telemetry.addData("RPM", _robot.getShooter().getRPM());
+                telemetry.addData("Robot State:", _robot.getState());
+                telemetry.addData("Current RPM", _robot.getShooter().getRPM());
+                telemetry.addData("Hood Position:", _robot.getShooter().getHood());
+                telemetry.update();
             }
         } else {
             telemetry.addLine("No GamePads Instantiated");

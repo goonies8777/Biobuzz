@@ -9,9 +9,11 @@ import com.seattlesolvers.solverslib.drivebase.MecanumDrive;
 import com.seattlesolvers.solverslib.drivebase.RobotDrive;
 import com.seattlesolvers.solverslib.util.Timing;
 
+import org.firstinspires.ftc.teamcode.Goonies.Autonomous.IAutonomousDriveTrain;
+
 import java.util.concurrent.TimeUnit;
 
-public class MecanumDriveTrain implements IDriveTrain{
+public class MecanumDriveTrain implements IDriveTrain, IAutonomousDriveTrain {
     DcMotor _leftFront;
     DcMotor _leftBack;
     DcMotor _rightFront;
@@ -105,6 +107,7 @@ public class MecanumDriveTrain implements IDriveTrain{
         setPower(0);
     }
 
+    @Override
     public void driveBackwardForMilliseconds(int milliseconds){
         Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
 
@@ -117,6 +120,7 @@ public class MecanumDriveTrain implements IDriveTrain{
         setPower(0);
     }
 
+    @Override
     public void driveLeftForMilliseconds(int milliseconds){
         Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
 
@@ -133,6 +137,7 @@ public class MecanumDriveTrain implements IDriveTrain{
         setPower(0);
     }
 
+    @Override
     public void driveRightForMilliseconds(int milliseconds){
         Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
 
@@ -148,6 +153,7 @@ public class MecanumDriveTrain implements IDriveTrain{
         setPower(0);
     }
 
+    @Override
     public void strafeRightForMilliseconds(int milliseconds){
         Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
 
@@ -163,6 +169,7 @@ public class MecanumDriveTrain implements IDriveTrain{
         setPower(0);
     }
 
+    @Override
     public void strafeLeftForMilliseconds(int milliseconds){
         Timing.Timer timer = new Timing.Timer(milliseconds, TimeUnit.MILLISECONDS);
 

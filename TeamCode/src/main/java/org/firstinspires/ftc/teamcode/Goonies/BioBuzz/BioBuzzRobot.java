@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.Goonies.Common.MecanumDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.Ramp;
 import org.firstinspires.ftc.teamcode.Goonies.Common.RobotState;
 import org.firstinspires.ftc.teamcode.Goonies.Common.Shooter;
+import org.firstinspires.ftc.teamcode.Goonies.Common.ShooterConstants;
 
 public class BioBuzzRobot implements IRobot {
     private final HardwareMap _hardwareMap;
@@ -81,6 +82,32 @@ public class BioBuzzRobot implements IRobot {
         if (forAutonomous)
         {
             _automated = true;
+        }
+    }
+
+    @Override
+    public void handleState(){
+        switch(_state){
+            case  Driving:
+                _intake.stop();
+                _shooter.setRPM(0);
+                _shooter.setPower(0);
+                _shooter.setHood(ShooterConstants.POSITION_1);
+                _ramp.closeGate();
+                _ramp.unkick();
+                break;
+            case Shooting:
+                _intake.stop();
+                break;
+
+            case Intake:
+                _shooter.setRPM(0);
+                _shooter.setPower(0);
+                _ramp.closeGate();
+                _intake.start();
+                _ramp.unkick();
+                _shooter.setHood(ShooterConstants.POSITION_1);
+                break;
         }
     }
 

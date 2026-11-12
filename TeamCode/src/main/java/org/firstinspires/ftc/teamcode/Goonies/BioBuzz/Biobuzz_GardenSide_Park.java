@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Goonies.BioBuzz;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Goonies.Autonomous.IAutonomousDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
 import org.firstinspires.ftc.teamcode.Goonies.Common.MecanumDriveTrain;
 
@@ -31,11 +32,13 @@ public class Biobuzz_GardenSide_Park extends LinearOpMode {
 
         waitForStart();
 
-        MecanumDriveTrain driveTrain = (MecanumDriveTrain)_robot.getDriveTrain();
+        IAutonomousDriveTrain driveTrain = (IAutonomousDriveTrain)_robot.getDriveTrain();
         driveTrain.driveForwardForMilliseconds(1000);
 
-        driveTrain.strafeLeftForMilliseconds(3000);
+        driveTrain.strafeLeftForMilliseconds(2000);
 
-        driveTrain.driveForwardForMilliseconds(5000);
+        driveTrain.driveForwardForMilliseconds(2500);
+
+        driveTrain.strafeLeftForMilliseconds(700);
     }
 }

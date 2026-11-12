@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Goonies.Common.Shooter;
 
-@TeleOp(group = "Goonies", name = "Shooter kV Tuner")
+@TeleOp(group = "Tuners", name = "Shooter kV Tuner")
 public class Shooter_kVTuner extends OpMode {
     Shooter _shooter;
     public static double kV = 0.000171;

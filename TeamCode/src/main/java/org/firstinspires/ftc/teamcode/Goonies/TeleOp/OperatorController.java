@@ -6,6 +6,7 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
 import org.firstinspires.ftc.teamcode.Goonies.Common.RobotConstants;
 import org.firstinspires.ftc.teamcode.Goonies.Common.RobotState;
+import org.firstinspires.ftc.teamcode.Goonies.Common.ShooterConstants;
 
 public class OperatorController implements IController{
     private final GamepadEx _gamePad;
@@ -20,6 +21,8 @@ public class OperatorController implements IController{
     {
         if (_gamePad.getButton(GamepadKeys.Button.LEFT_BUMPER) && _gamePad.getButton(GamepadKeys.Button.A)){
             _robot.setState(RobotState.Shooting);
+
+            _robot.getShooter().setHood(ShooterConstants.POSITION_1);
         }
 
         if (_gamePad.getButton(GamepadKeys.Button.LEFT_BUMPER) && _gamePad.getButton(GamepadKeys.Button.B)){
@@ -28,26 +31,21 @@ public class OperatorController implements IController{
 
         if (_gamePad.getButton(GamepadKeys.Button.LEFT_BUMPER) && _gamePad.getButton(GamepadKeys.Button.X)){
             _robot.setState(RobotState.Intake);
-            _robot.getIntake().start();
         }
+
+        _robot.handleState();
 
         switch(_robot.getState())
         {
             case Driving:
-                _robot.getShooter().setRPM(0);
-                _robot.getIntake().stop();
-                _robot.getTransfer().closeGate();
                 HandleDrivingState();
                 break;
 
             case Shooting:
-                _robot.getIntake().stop();
                 HandleShootingState();
                 break;
 
             case Intake:
-                _robot.getShooter().setRPM(0);
-                _robot.getTransfer().closeGate();
                 HandleIntakeState();
                 break;
         }
@@ -56,19 +54,19 @@ public class OperatorController implements IController{
     private void HandleShootingState(){
 
         if (_gamePad.getButton(GamepadKeys.Button.A)){
-            _robot.getShooter().setHood(.5);
+            _robot.getShooter().setHood(ShooterConstants.POSITION_1);
         }
 
         if (_gamePad.getButton(GamepadKeys.Button.B)){
-            _robot.getShooter().setHood(.35);
+            _robot.getShooter().setHood(ShooterConstants.POSITION_2);
         }
 
         if (_gamePad.getButton(GamepadKeys.Button.X)){
-            _robot.getShooter().setHood(.4);
+            _robot.getShooter().setHood(ShooterConstants.POSITION_3);
         }
 
         if (_gamePad.getButton(GamepadKeys.Button.Y)){
-            _robot.getShooter().setHood(.45);
+            _robot.getShooter().setHood(ShooterConstants.POSITION_4);
         }
 
         if (_gamePad.getButton(GamepadKeys.Button.DPAD_DOWN)){
@@ -87,7 +85,7 @@ public class OperatorController implements IController{
             _robot.getTransfer().unkick();
         }
 
-        _robot.getShooter().setRPM(RobotConstants.ShooterRPM);
+        _robot.getShooter().setRPM(ShooterConstants.TARGET_RPM);
     }
 
     private void HandleDrivingState(){

@@ -10,27 +10,22 @@ public class Shooter implements IShooter {
     private final DcMotorEx flyWheel;
     private final Servo hoodControl;
 
-    private double encoderCPM = 28;
-    private double gearRatio = 1;
-
-    public static double kV = 0.000171;
-    public static double kS = 0.085;
-    public static double kP = 0.00045;
-
     public Shooter (HardwareMap hwMap){
         flyWheel = hwMap.get(DcMotorEx.class, "shooter");
         flyWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         flyWheel.setDirection(DcMotorSimple.Direction.FORWARD);
 
         hoodControl = hwMap.get(Servo.class, "hood");
-        hoodControl.setPosition(.5);
-        hoodControl.setPosition(.45);
+        hoodControl.setPosition(ShooterConstants.POSITION_4+0.1);
+        hoodControl.setPosition(ShooterConstants.POSITION_3);
     }
 
     public void setHood(double position)
     {
         hoodControl.setPosition(position);
     }
+
+    public double getHood() { return hoodControl.getPosition(); }
 
     public void setPower(double power){
         flyWheel.setPower(power);
@@ -43,8 +38,8 @@ public class Shooter implements IShooter {
     public void setRPM(double targetRPM){
         //call this every loop
         double error = targetRPM - getRPM();
-        double feedForward = (kV * targetRPM) + kS;
-        double feedBack = error * kP;
+        double feedForward = (ShooterConstants.kV * targetRPM) + ShooterConstants.kS;
+        double feedBack = error * ShooterConstants.kP;
         double power = feedForward + feedBack;
 
         setPower(power);
@@ -55,6 +50,6 @@ public class Shooter implements IShooter {
     }
 
     public double getRPM(){
-        return ((getTicksPerSec()/encoderCPM)*60)/gearRatio;
+        return ((getTicksPerSec()/ShooterConstants.ENCODER_CPM)*60)/ShooterConstants.GEAR_RATIO;
     }
 }
