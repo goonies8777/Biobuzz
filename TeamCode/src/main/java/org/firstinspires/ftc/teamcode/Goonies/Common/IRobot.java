@@ -12,6 +12,7 @@ public interface IRobot {
     IMU getIMU();
     ITransfer getTransfer();
     IIntake getIntake();
+    ICamera getCamera();
 
     void updateIndicators();
     RobotState getState();

@@ -39,11 +39,14 @@ public class Biobuzz_GardenSide_ShootPark extends LinearOpMode {
 
         IAutonomousDriveTrain driveTrain = (IAutonomousDriveTrain)_robot.getDriveTrain();
 
-        _robot.getShooter().setRPM(ShooterConstants.AUTO_RPM/3.5);
-        _robot.getShooter().setHood(ShooterConstants.POSITION_4);
+        _robot.getShooter().setRPM(ShooterConstants.AUTO_RPM/3.25);
+        _robot.getShooter().setHood(ShooterConstants.POSITION_1);
 
-        driveTrain.driveForwardForMilliseconds(500);
+        driveTrain.driveBackwardForMilliseconds(250);
 
+        Timing.Timer timer = new Timing.Timer(500, TimeUnit.MILLISECONDS);
+        timer.start();
+        while (!timer.done()) {}
         _robot.getTransfer().openGate();
 
         for(int i = 0; i < 4; i++) {
@@ -60,10 +63,10 @@ public class Biobuzz_GardenSide_ShootPark extends LinearOpMode {
             while (!timer2.done()) {}
         }
 
-        driveTrain.strafeLeftForMilliseconds(2000);
+        driveTrain.strafeRightForMilliseconds(2000);
 
-        driveTrain.driveForwardForMilliseconds(3000);
+        driveTrain.driveBackwardForMilliseconds(2500);
 
-        driveTrain.strafeLeftForMilliseconds(500);
+        driveTrain.strafeRightForMilliseconds(1500);
     }
 }

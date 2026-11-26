@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.teamcode.Goonies.Common.HuskyLensCamera;
+import org.firstinspires.ftc.teamcode.Goonies.Common.ICamera;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IDriveTrain;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IIntake;
 import org.firstinspires.ftc.teamcode.Goonies.Common.IRobot;
@@ -28,6 +30,7 @@ public class BioBuzzRobot implements IRobot {
     private IMU _imu;
     private IIntake _intake;
     private ITransfer _ramp;
+    private ICamera _camera;
 
     private RobotState _state;
     private boolean _automated = false;
@@ -74,6 +77,7 @@ public class BioBuzzRobot implements IRobot {
 
         _intake = new Intake(_hardwareMap);
         _ramp = new Ramp(_hardwareMap);
+        _camera = new HuskyLensCamera(_hardwareMap);
 
         if (!forAutonomous) {
             _automated = false;
@@ -124,6 +128,9 @@ public class BioBuzzRobot implements IRobot {
 
     @Override
     public IIntake getIntake() { return _intake; }
+
+    @Override
+    public ICamera getCamera() { return _camera; }
 
     @Override
     public void updateIndicators()
